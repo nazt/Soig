@@ -29,7 +29,9 @@ class CarReservation extends Controller {
     }
 	function destroyCarDetail()
 	{
-		$this->session->unset_userdata('car');
+		$array_items['commit']['car']='';
+
+		$this->session->unset_userdata($array_items);
 	}
 	function showSession()
 	{
@@ -37,7 +39,40 @@ class CarReservation extends Controller {
 	}
 	function confirm()
 	{
-		print_r($_POST);
+		// print_r($_POST);
+		
+		if($_POST)
+		{
+		// $this->session->userdata["commit"]["car"]=$_POST;
+		$data["commit"]["car"]=$_POST;
+		$this->session->set_userdata($data);
+		}
+		else
+		{
+			$array_items['commit']['car']='';
+
+			$this->session->unset_userdata($array_items);
+		}
+		redirect('CarReservation/checkStatus');		
+		//print_r($this->session->userdata);
+	}
+	function checkStatus()
+	{
+		// print_r($this->session->userdata);
+		$services=array("car","hotel",'flight');
+		foreach ($services as $key => $service) {
+			if(!empty($this->session->userdata["commit"][$service])  )
+			{
+				printf("%s defined!  with<br>\n",$service);
+				echo " <pre> ";
+				print_r($this->session->userdata["commit"][$service]);
+				echo "</pre>";
+			}
+			else
+			{
+				printf("%s not defined! <br>\n",$service);
+			}
+		}
 	}
 	function addCarDetail()
 	{
