@@ -94,7 +94,7 @@ echo form_dropdown('brand',$brand,'',$js);
 			
  <input type="submit" id="submit" name="submit" value="submit" />
 </div>
- 
+ <br>
 	<div id="content">
 </body>
 </html>

@@ -2,6 +2,7 @@
 <head>
 <title>Test</title>
 
+<LINK REL=StyleSheet HREF="http://localhost/nusoap/smodal.css" TYPE="text/css" MEDIA=screen>
  
  
 </head>
@@ -17,8 +18,8 @@
 
 	echo form_open('CarReservation/addCarDetail', $attributes);
 ?>
-<table border="1" cellspacing="5" cellpadding="5">
-	<tr><th>Tick</th><th>Car Brand</th><th>Model</th><th>Fuel</th><th>Colour</th><th>Car Type</th><th>pickUpCity</th><th>carRegistration</th><th>Rate [Bht/Day]</th></tr>
+<table border="1" cellspacing="0" cellpadding="1" width="500">
+	<tr><th width ="60"> Tick</th><th width ="100"0>Car Brand</th><th width ="60">Model</th><th width ="60">Fuel</th><th width ="60">Colour</th><th width="80">Car Type</th><th width ="80">pickUpCity</th><th width="30">carRegistration</th><th width="100">Rate [Bht/Day]</th><th></th></tr>
 
 <?
 
@@ -38,7 +39,7 @@
 	// $data["temp"]["car"]["detail"][$id]["rate"]=$value['rate'];
 	// $this->session->set_userdata($data);
 	?>
-	<tr><td><?  	echo form_checkbox($data);  ?></td><td><?=$detail[$id]['brand']?></td><td><?=$value['model']?></td><td><?=$detail[$id]['fuel']?></td><td><?=$detail[$id]['colour']?></td><td><?=$detail[$id]['type']?></td><td><?=$detail[$id]['city']?></td><td><?=$value['carRegistration']?></td><td><?=$value['rate']?><? echo form_hidden('rate[]', $value['rate']);?></td></tr>
+	<tr><td><center><?  	echo form_checkbox($data);  ?></center></td><td><center><?=$detail[$id]['brand']?></center></td><td><center><?=$value['model']?></center></td><td><center><?=$detail[$id]['fuel']?></center></td><td><center><?=$detail[$id]['colour']?></center></td><td><center><?=$detail[$id]['type']?></center></td><td><center><?=$detail[$id]['city']?></center></td><td><center><?=$value['carRegistration']?></center></td><td><center><?=$value['rate']?><? echo form_hidden('rate[]', $value['rate']);?></center></td></tr>
  
  
 <?php endforeach;?>

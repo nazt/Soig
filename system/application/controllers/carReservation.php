@@ -30,6 +30,12 @@ class CarReservation extends Controller {
 	function destroyCarDetail()
 	{
 		$array_items['commit']['car']='';
+		$array_items['commit']='';
+		$array_items['car']='';
+		$array_items['hotel']='';		
+		$array_items['flight']='';				
+		$array_items['user']='';	
+		$array_items['payment']='';					
 
 		$this->session->unset_userdata($array_items);
 	}
@@ -43,29 +49,32 @@ class CarReservation extends Controller {
 		
 		if($_POST)
 		{
-		// $this->session->userdata["commit"]["car"]=$_POST;
-		$data["commit"]["car"]=$_POST;
-		$this->session->set_userdata($data);
+			$newdata = array(
+			                   'car'  => $_POST,
+//			                   'car'     =>	$this->session->userdata('car'),
+			               );
+			// print_r($this->session->userdata('car'));
+			$this->session->set_userdata($newdata);
 		}
 		else
 		{
-			$array_items['commit']['car']='';
-
+			$array_items['car']='';
+			echo "CAR ELFE";
 			$this->session->unset_userdata($array_items);
 		}
-		redirect('CarReservation/checkStatus');		
+		redirect('http://localhost/nusoap/index/');		
 		//print_r($this->session->userdata);
 	}
 	function checkStatus()
 	{
 		// print_r($this->session->userdata);
-		$services=array("car","hotel",'flight');
+		$services=array("car","hotel",'flight','user','payment');
 		foreach ($services as $key => $service) {
-			if(!empty($this->session->userdata["commit"][$service])  )
+			if(!empty($this->session->userdata[$service])  )
 			{
 				printf("%s defined!  with<br>\n",$service);
 				echo " <pre> ";
-				print_r($this->session->userdata["commit"][$service]);
+				print_r($this->session->userdata[$service]);
 				echo "</pre>";
 			}
 			else
@@ -86,7 +95,8 @@ class CarReservation extends Controller {
 			$id=$value;
 			$param = array('in0' => $id);
 			$result = $this->soapclient->call('getRateFromId', array('parameters' => $param), '', '', false, true);					
-			 $SUM_RATE+=$result["out"];			 
+			 $SUM_RATE+=$result["out"];		
+			$data["erate"][]=$result["out"];	 
 		}
 		// echo "SUM" .$SUM_RATE;
 		$data["rate"]=$SUM_RATE;

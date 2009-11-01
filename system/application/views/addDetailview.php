@@ -10,12 +10,12 @@
 </head>
 <body >
     <div class="nav">
-        <span class="menuButton"><a class="home" href="CarReservation">Home</a></span>
+        <span class="menuButton"><a class="home" href="http://localhost/nusoap/index">Home</a></span>
 
-        <span class="menuButton"><a href="http://localhost/nusoap/SOig/index.php/CarReservation/searchCar" class="list">default.list.label</a></span>
+        <span class="menuButton"><a href="http://localhost/nusoap/SOig/index.php/CarReservation/searchCar" class="list">Search Car</a></span>
     </div>
     <div class="body">
-        <h1>Reservation Detail</h1>
+        <h1>Car Reservation Detail</h1>
  
  
 
@@ -39,7 +39,8 @@ $form_input_data = array(
 	
  <table border="0" cellspacing="1" cellpadding="1">
 	<?=form_hidden('id[]', $value);?>
- 	<tr  class="prop"><th>Total Rate</th><td> <?=$rate;?></td></tr>
+	<?=form_hidden('rate[]', $erate[$key]);?>
+ 	<tr  class="prop"><th>Rate</th><td><?=$erate[$key]?></td></tr>
  	<tr  class="prop"><th>Brand</th><td><?=$detail[$value]["brand"]?></td></tr>
  	<tr  class="prop"><th>Colour</th><td><?=$detail[$value]["colour"]?></td></tr>
  	<tr  class="prop"><th>Gear</th><td><?=$detail[$value]["gear"]?></td></tr>
@@ -48,10 +49,8 @@ $form_input_data = array(
  	<tr  class="prop"><th>Engine</th><td><?=$detail[$value]["engine"]?></td></tr>
  	<tr  class="prop"><th>pickUpCity</th><td><?=$detail[$value]["city"]?></td></tr>
  	<tr  class="prop"><th>dropOffCity</th><td><? echo form_dropdown('city[]',$city); ?></td></tr>
- 	<tr  class="prop"><th>Driver Age</th><td><?   echo form_dropdown('driverage[]',array("25+"=>"25+","14-24"=>"14-24")); ?> </td></tr>
- 	<tr  class="prop"><th>Driver Name</th><td><? $form_input_data['name']='drivername[]'; echo form_input($form_input_data); ?></td></tr>
- 	<tr  class="prop"><th>Driver Id</th><td><? $form_input_data['name']='driverid[]'; echo form_input($form_input_data); ?></td></tr>
- 	<tr  class="prop"><th>Phone Number</th><td><? $form_input_data['name']='phone[]'; echo form_input($form_input_data); ?></td></tr>
+
+
  	<tr  class="prop">
 		<th>pickupDate</th><td><select name="pickupDate_day[]" id="pickupDate_day">
 		<option value="1"
@@ -1085,10 +1084,11 @@ $form_input_data = array(
 
  </table>
 </div>
+
 	<br>
 <?php endforeach;?>
-	
-	
+	<div  class="prop"> Total Rate  <?=$rate?> </div>	
+	 
 <div class="buttons">
     <span class="button"><input type="submit" class="save" name="create" value="Create" id="create" /></span>
 </div>
